@@ -2,8 +2,9 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Stipendio Countdown</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
   :root {
     --panel-bg: rgba(0,0,0,0.55);
@@ -11,7 +12,8 @@
   * { box-sizing: border-box; }
   html, body {
     margin: 0;
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;
     font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
     overflow: hidden;
   }
@@ -21,6 +23,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    padding: clamp(0.4rem, 1.5vmin, 1rem) 0;
     background: linear-gradient(270deg, #ff0000, #ff9900, #ffff00, #33ff00, #00ffff, #3300ff, #ff00ff, #ff0000);
     background-size: 1600% 1600%;
     animation: rainbow 18s linear infinite;
@@ -31,8 +34,9 @@
   }
 
   .title {
+    flex: 0 0 auto;
     color: #fff;
-    font-size: 2.2rem;
+    font-size: clamp(1rem, 6vmin, 2.2rem);
     text-shadow: 3px 3px 0 #000, -1px -1px 0 #000;
     margin-bottom: 0.2rem;
     text-align: center;
@@ -40,43 +44,46 @@
   }
 
   .countdown {
+    flex: 0 0 auto;
     background: var(--panel-bg);
     color: #fff;
-    padding: 1rem 2rem;
+    padding: clamp(0.4rem, 2vmin, 1rem) clamp(0.8rem, 4vmin, 2rem);
     border-radius: 20px;
-    font-size: 1.6rem;
+    font-size: clamp(0.9rem, 4.5vmin, 1.6rem);
     display: flex;
-    gap: 1.5rem;
-    margin: 1rem 0;
+    gap: clamp(0.6rem, 3vmin, 1.5rem);
+    margin: clamp(0.4rem, 2vmin, 1rem) 0;
     text-align: center;
     flex-wrap: wrap;
     justify-content: center;
   }
   .countdown div { display: flex; flex-direction: column; }
-  .countdown span.num { font-size: 2.4rem; font-weight: bold; }
-  .countdown span.lbl { font-size: 0.8rem; opacity: 0.8; text-transform: uppercase; }
+  .countdown span.num { font-size: clamp(1.2rem, 7vmin, 2.4rem); font-weight: bold; }
+  .countdown span.lbl { font-size: clamp(0.6rem, 2.2vmin, 0.8rem); opacity: 0.8; text-transform: uppercase; }
 
   .stage {
+    flex: 0 0 auto;
     color: #fff;
     text-shadow: 2px 2px 0 #000;
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+    font-size: clamp(0.8rem, 3.2vmin, 1.1rem);
+    margin-bottom: clamp(0.3rem, 1.5vmin, 1rem);
     text-align: center;
     padding: 0 1rem;
   }
 
   #alert-banner {
+    flex: 0 0 auto;
     background: #d40000;
     color: #fff;
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: clamp(0.8rem, 4.5vmin, 1.3rem);
     letter-spacing: 1px;
-    padding: 0.5rem 1.4rem;
+    padding: clamp(0.3rem, 1.5vmin, 0.5rem) clamp(0.7rem, 3.5vmin, 1.4rem);
     border-radius: 8px;
     text-align: center;
     text-shadow: 1px 1px 0 #000;
     box-shadow: 0 0 12px rgba(255,0,0,0.7);
-    margin-bottom: 0.6rem;
+    margin-bottom: clamp(0.3rem, 1.5vmin, 0.6rem);
     animation: blink-alert 0.9s steps(1, end) infinite;
   }
   @keyframes blink-alert {
@@ -89,15 +96,23 @@
      Current states driven by body class: state-chill / state-walk / state-hustle / state-panic / state-payday
   */
   #character {
-    font-size: 6rem;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(3rem, 22vmin, 7rem);
     line-height: 1;
     filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.4));
     display: flex;
+    align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
   #character img {
-    width: min(28rem, 70vw);
-    height: min(28rem, 60vh);
+    max-width: 90%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
     object-fit: contain;
   }
   body.state-chill #character   { animation: bob 2.5s ease-in-out infinite; }
@@ -123,8 +138,8 @@
   /* config button + panel */
   #cfg-btn {
     position: fixed;
-    bottom: 1.2rem;
-    right: 1.2rem;
+    bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
+    right: calc(1.2rem + env(safe-area-inset-right, 0px));
     width: 3.2rem;
     height: 3.2rem;
     border-radius: 50%;
@@ -139,8 +154,8 @@
 
   #cfg-panel {
     position: fixed;
-    bottom: 5rem;
-    right: 1.2rem;
+    bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+    right: calc(1.2rem + env(safe-area-inset-right, 0px));
     background: rgba(20,20,20,0.92);
     color: #fff;
     padding: 1rem;
@@ -149,7 +164,8 @@
     flex-direction: column;
     gap: 0.6rem;
     z-index: 20;
-    min-width: 220px;
+    width: 220px;
+    max-width: calc(100vw - 2.4rem);
   }
   #cfg-panel.open { display: flex; }
   #cfg-panel label { font-size: 0.85rem; }
