@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stipendio Countdown</title>
+<style>
+  :root {
+    --panel-bg: rgba(0,0,0,0.55);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(270deg, #ff0000, #ff9900, #ffff00, #33ff00, #00ffff, #3300ff, #ff00ff, #ff0000);
+    background-size: 1600% 1600%;
+    animation: rainbow 18s linear infinite;
+  }
+  @keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  .title {
+    color: #fff;
+    font-size: 2.2rem;
+    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000;
+    margin-bottom: 0.2rem;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .countdown {
+    background: var(--panel-bg);
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    font-size: 1.6rem;
+    display: flex;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .countdown div { display: flex; flex-direction: column; }
+  .countdown span.num { font-size: 2.4rem; font-weight: bold; }
+  .countdown span.lbl { font-size: 0.8rem; opacity: 0.8; text-transform: uppercase; }
+
+  .stage {
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  #alert-banner {
+    background: #d40000;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    padding: 0.5rem 1.4rem;
+    border-radius: 8px;
+    text-align: center;
+    text-shadow: 1px 1px 0 #000;
+    box-shadow: 0 0 12px rgba(255,0,0,0.7);
+    margin-bottom: 0.6rem;
+    animation: blink-alert 0.9s steps(1, end) infinite;
+  }
+  @keyframes blink-alert {
+    0%, 49% { opacity: 1; background: #d40000; }
+    50%, 100% { opacity: 1; background: #7a0000; }
+  }
+
+  /* ---- CHARACTER PLACEHOLDER ----
+     Swap #character's inner emoji with a Mixamo-exported sprite/video/lottie later.
+     Current states driven by body class: state-chill / state-walk / state-hustle / state-panic / state-payday
+  */
+  #character {
+    font-size: 6rem;
+    line-height: 1;
+    filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.4));
+    display: flex;
+    justify-content: center;
+  }
+  #character img {
+    width: min(28rem, 70vw);
+    height: min(28rem, 60vh);
+    object-fit: contain;
+  }
+  body.state-chill #character   { animation: bob 2.5s ease-in-out infinite; }
+  body.state-walk #character    { animation: bob 1.4s ease-in-out infinite; }
+  body.state-hustle #character  { animation: shake 0.5s ease-in-out infinite; }
+  body.state-panic #character   { animation: shake 0.15s ease-in-out infinite; }
+  body.state-payday #character  { animation: jump 0.6s ease-in-out infinite; }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translate(0,0) rotate(0deg); }
+    25% { transform: translate(-6px,0) rotate(-4deg); }
+    75% { transform: translate(6px,0) rotate(4deg); }
+  }
+  @keyframes jump {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.1); }
+  }
+
+  /* config button + panel */
+  #cfg-btn {
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 20;
+  }
+  #cfg-btn:hover { background: rgba(0,0,0,0.8); }
+
+  #cfg-panel {
+    position: fixed;
+    bottom: 5rem;
+    right: 1.2rem;
+    background: rgba(20,20,20,0.92);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    display: none;
+    flex-direction: column;
+    gap: 0.6rem;
+    z-index: 20;
+    min-width: 220px;
+  }
+  #cfg-panel.open { display: flex; }
+  #cfg-panel label { font-size: 0.85rem; }
+  #cfg-panel select, #cfg-panel input {
+    padding: 0.4rem;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+  }
+  #cfg-panel button.save {
+    background: #33cc66;
+    color: #000;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body class="state-chill">
+
+  <h1 class="title">Quanto manca allo stipendio? 💸</h1>
+
+  <div class="countdown" id="countdown">
+    <div><span class="num" id="d">--</span><span class="lbl">giorni</span></div>
+    <div><span class="num" id="h">--</span><span class="lbl">ore</span></div>
+    <div><span class="num" id="m">--</span><span class="lbl">min</span></div>
+    <div><span class="num" id="s">--</span><span class="lbl">sec</span></div>
+  </div>
+
+  <div id="alert-banner">MANCANO <span id="alert-days">--</span> GIORNI</div>
+  <div class="stage" id="stage-text">caricamento...</div>
+
+  <div id="character">🧍</div>
+
+  <button id="cfg-btn" title="Impostazioni">⚙️</button>
+  <div id="cfg-panel">
+    <label for="payday-input">Giorno dello stipendio (1-31)</label>
+    <input type="number" id="payday-input" min="1" max="31" value="10">
+    <button class="save" id="cfg-save">Salva</button>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'payday-day';
+    const MANIFEST_URL = 'assets/animations/manifest.json';
+
+    let paydayDay = parseInt(localStorage.getItem(STORAGE_KEY) || '10', 10);
+    let manifest = {};
+    let currentFolder = null;
+    let currentFile = null;
+
+    const dEl = document.getElementById('d');
+    const hEl = document.getElementById('h');
+    const mEl = document.getElementById('m');
+    const sEl = document.getElementById('s');
+    const stageText = document.getElementById('stage-text');
+    const alertDaysEl = document.getElementById('alert-days');
+    const alertBanner = document.getElementById('alert-banner');
+    const characterEl = document.getElementById('character');
+    const body = document.body;
+
+    const cfgBtn = document.getElementById('cfg-btn');
+    const cfgPanel = document.getElementById('cfg-panel');
+    const paydayInput = document.getElementById('payday-input');
+    const cfgSave = document.getElementById('cfg-save');
+
+    paydayInput.value = paydayDay;
+
+    cfgBtn.addEventListener('click', () => cfgPanel.classList.toggle('open'));
+
+    cfgSave.addEventListener('click', () => {
+      const v = parseInt(paydayInput.value, 10);
+      if (v >= 1 && v <= 31) {
+        paydayDay = v;
+        localStorage.setItem(STORAGE_KEY, v);
+        cfgPanel.classList.remove('open');
+        tick();
+      }
+    });
+
+    // fetch fallisce su file:// (apertura diretta doppio click); su hosting reale (Cloudflare Pages) funziona.
+    fetch(MANIFEST_URL)
+      .then(r => r.ok ? r.json() : {})
+      .catch(() => ({}))
+      .then(data => {
+        manifest = data || {};
+        currentFolder = null; // forza ripescaggio con manifest caricato
+        tick();
+      });
+
+    function pickRandomFile(folder) {
+      const files = manifest[folder];
+      if (!files || !files.length) return null;
+      return files[Math.floor(Math.random() * files.length)];
+    }
+
+    // frasi per fascia, "67d" split per giorno esatto (7 vs 6) perche' il testo cambia, la gif no
+    const PHRASES = {
+      '30d': [
+        'Sono ricco.', 'Oggi non guardo i prezzi.', 'Pago io.', 'Problemi economici? Mai sentiti.',
+        'Questo mese spendo senza pensieri.', 'Ho troppi soldi.', 'Il conto sorride.', 'Mi sento milionario.',
+        'Prendo quello che voglio.', 'Budget? Che cos\'è?', 'Offro io ragazzi.', 'La povertà è un problema degli altri.',
+        'Amazon, preparati.', 'Questo stipendio durerà per sempre.', 'Oggi si vive.',
+      ],
+      '20d': [
+        'Aspetta...', 'Dove sono finiti tutti quei soldi?', 'Forse ho speso troppo.',
+        'Il conto è un po\' più basso del previsto.', 'Vabbè, c\'è ancora tempo.', 'Non devo più comprare niente.',
+        'Da oggi risparmio.', 'Questa è stata l\'ultima spesa.', 'Ok, basta shopping.', 'Posso ancora farcela.',
+      ],
+      '10d': [
+        'Forse ho fatto un errore.', 'La situazione non è ideale.', 'Non sta andando benissimo.',
+        'Mi servono rinforzi.', 'Chi mi presta 20€?', 'Da oggi solo acqua.', 'La vedo male.',
+        'Non guardo più il saldo.', 'Andrà tutto bene.', 'Sono tranquillo.',
+      ],
+      '67d_7': [
+        'SEI SETTE 🗣️', 'SEEEEEI SETTEEEE', '7 GIORNI. 67.', 'Il 67 è arrivato.', 'Non chiedere. 67.',
+        'Se sai, sai.', '6️⃣7️⃣', 'SEI. SETTE.', '67. Basta.', '🗣️🗣️ SEI SETTE 🗣️🗣️',
+      ],
+      '67d_6': [
+        'SEI SETTE.', 'Ancora 67.', '67 non si discute.', 'La situazione è 67.', 'Ho perso il controllo. 67.',
+        '6️⃣ 7️⃣', 'Non so più cosa sto facendo.', 'È tutto 67.', '67 MENTALE.', 'SEI SETTEEEEE.',
+      ],
+      '5d': [
+        'Mi servono i soldi.', 'Per favore.', 'Non ce la faccio più.', 'Chi mi offre un caffè?',
+        'Sono ufficialmente al verde.', 'Ogni euro conta.', 'Basta, voglio essere pagato.',
+        'Il mio conto mi sta insultando.', 'Ho bisogno di uno stipendio.', 'Datemi i miei soldi.',
+      ],
+      '3d': [
+        'Ti prego.', 'Manca troppo.', 'Quanto ci mette questo stipendio?', 'Non chiedo molto.',
+        'Bastano anche pochi euro.', 'Aiutatemi.', 'Sto resistendo.', 'Non guarderò più il conto.',
+        'Perché è ancora così lontano?', 'Ho bisogno di un miracolo.',
+      ],
+      '2d': [
+        'Ci siamo quasi.', 'Manca pochissimo.', 'Posso sentirlo.', 'La luce in fondo al tunnel.',
+        'Resisti.', 'Ancora un piccolo sforzo.', 'Quasi.', 'È vicino.', 'Non mollare adesso.', 'Domani no... ma quasi.',
+      ],
+      '1d': [
+        'DOMANI.', 'DOMANI ARRIVANO.', 'MANCANO SOLO 24 ORE.', 'NON DORMIRÒ STANOTTE.', 'È QUASI QUI.',
+        'RESISTI.', 'CI SIAMO.', 'DOMANI SI SPENDE.', 'PREPARATE I PORTAFOGLI.', 'IL GRANDE GIORNO.',
+      ],
+      'payday': [
+        'È ARRIVATO. 💰', 'PAGATO.', 'SIAMO RICCHI.', 'FINALMENTE.', 'I SOLDI SONO QUI.',
+        'OGGI SI FESTEGGIA.', 'PAGA ARRIVATA.', 'SI SPENDE.', 'OFFRO IO.', 'NON GUARDATE IL MIO SALDO',
+      ],
+    };
+
+    let currentPhraseKey = null;
+    let currentPhrase = '';
+
+    function phraseKeyFor(folder, daysLeft) {
+      if (folder === '67d') return daysLeft === 7 ? '67d_7' : '67d_6';
+      return folder;
+    }
+
+    function pickPhrase(key) {
+      const list = PHRASES[key];
+      if (!list || !list.length) return '';
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function updateAlert(daysLeft) {
+      if (daysLeft === null) {
+        alertBanner.style.display = 'none';
+        return;
+      }
+      alertBanner.style.display = '';
+      alertDaysEl.textContent = daysLeft;
+    }
+
+    function setCharacterVisual(emoji) {
+      if (!currentFile) {
+        characterEl.textContent = emoji;
+        return;
+      }
+      characterEl.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = 'assets/animations/' + currentFolder + '/' + encodeURIComponent(currentFile);
+      img.alt = '';
+      img.onerror = () => { characterEl.textContent = emoji; };
+      characterEl.appendChild(img);
+    }
+
+    function nextPayday(now) {
+      let year = now.getFullYear();
+      let month = now.getMonth();
+      let candidate = new Date(year, month, paydayDay, 0, 0, 0, 0);
+      // clamp day if month has fewer days (e.g. day 31 in Feb -> last day of month)
+      if (candidate.getMonth() !== month) {
+        candidate = new Date(year, month + 1, 0, 0, 0, 0, 0);
+      }
+      if (candidate <= now) {
+        month += 1;
+        candidate = new Date(year, month, paydayDay, 0, 0, 0, 0);
+        if (candidate.getMonth() !== ((month % 12 + 12) % 12)) {
+          candidate = new Date(year, month + 1, 0, 0, 0, 0, 0);
+        }
+      }
+      return candidate;
+    }
+
+    // ordine crescente per max: si sceglie la prima fascia con daysLeft <= max. testo -> PHRASES
+    const STAGES = [
+      { max: 1,        folder: '1d',  cls: 'state-panic',  emoji: '💀' },
+      { max: 2,        folder: '2d',  cls: 'state-panic',  emoji: '😱' },
+      { max: 3,        folder: '3d',  cls: 'state-hustle', emoji: '🏃' },
+      { max: 5,        folder: '5d',  cls: 'state-hustle', emoji: '🏃' },
+      { max: 7,        folder: '67d', cls: 'state-walk',   emoji: '🚶' },
+      { max: 10,       folder: '10d', cls: 'state-walk',   emoji: '🚶' },
+      { max: 20,       folder: '20d', cls: 'state-chill',  emoji: '🧍' },
+      { max: Infinity, folder: '30d', cls: 'state-chill',  emoji: '🧘' },
+    ];
+
+    function updateStage(daysLeft) {
+      const chosen = STAGES.find(s => daysLeft <= s.max) || STAGES[STAGES.length - 1];
+      body.className = chosen.cls;
+      if (chosen.folder !== currentFolder) {
+        currentFolder = chosen.folder;
+        currentFile = pickRandomFile(currentFolder);
+      }
+      const pKey = phraseKeyFor(chosen.folder, daysLeft);
+      if (pKey !== currentPhraseKey) {
+        currentPhraseKey = pKey;
+        currentPhrase = pickPhrase(pKey);
+      }
+      setCharacterVisual(chosen.emoji);
+      stageText.textContent = currentPhrase;
+      updateAlert(daysLeft);
+    }
+
+    function tick() {
+      const now = new Date();
+      const target = nextPayday(now);
+      let diff = target - now;
+
+      if (diff <= 0) {
+        body.className = 'state-payday';
+        if (currentFolder !== 'payday') {
+          currentFolder = 'payday';
+          currentFile = pickRandomFile(currentFolder);
+        }
+        if (currentPhraseKey !== 'payday') {
+          currentPhraseKey = 'payday';
+          currentPhrase = pickPhrase('payday');
+        }
+        setCharacterVisual('🎉');
+        stageText.textContent = currentPhrase;
+        updateAlert(null);
+        dEl.textContent = hEl.textContent = mEl.textContent = sEl.textContent = '00';
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      dEl.textContent = String(days).padStart(2, '0');
+      hEl.textContent = String(hours).padStart(2, '0');
+      mEl.textContent = String(minutes).padStart(2, '0');
+      sEl.textContent = String(seconds).padStart(2, '0');
+
+      updateStage(days);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
