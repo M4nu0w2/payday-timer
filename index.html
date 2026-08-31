@@ -260,7 +260,8 @@
     function pickRandomFile(folder) {
       const files = manifest[folder];
       if (!files || !files.length) return null;
-      return files[Math.floor(Math.random() * files.length)];
+      const entry = files[Math.floor(Math.random() * files.length)];
+      return typeof entry === 'string' ? entry : entry.file;
     }
 
     // frasi per fascia, "67d" split per giorno esatto (7 vs 6) perche' il testo cambia, la gif no
@@ -282,7 +283,7 @@
         'Non guardo più il saldo.', 'Andrà tutto bene.', 'Sono tranquillo.',
       ],
       '67d_7': [
-        'SEI SETTE 🗣️', 'SEEEEEI SETTEEEE', '7 GIORNI. 67.', 'Il 67 è arrivato.', 'Non chiedere. 67.',
+        'SEI SETTE 🗣️', 'SEEEEEI SETTEEEE', '7 GIORNI. 67.', 'Non chiedere. 67.',
         'Se sai, sai.', '6️⃣7️⃣', 'SEI. SETTE.', '67. Basta.', '🗣️🗣️ SEI SETTE 🗣️🗣️',
       ],
       '67d_6': [
@@ -336,7 +337,13 @@
       alertDaysEl.textContent = daysLeft;
     }
 
+    let renderedKey = null; // evita di ricreare <img> ad ogni tick: altrimenti la gif riparte da capo ogni secondo
+
     function setCharacterVisual(emoji) {
+      const key = currentFile ? ('img:' + currentFolder + '/' + currentFile) : ('emoji:' + emoji);
+      if (key === renderedKey) return;
+      renderedKey = key;
+
       if (!currentFile) {
         characterEl.textContent = emoji;
         return;

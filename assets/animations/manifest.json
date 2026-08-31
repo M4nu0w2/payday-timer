@@ -1,100 +1,420 @@
 {
   "30d": [
-    "Fun Dancing GIF.gif",
-    "Hustling Dave Chappelle GIF.gif",
-    "Jon Stewart Crying GIF.gif",
-    "Looney Tunes Money GIF by GrowthX.gif",
-    "Make It Rain Money GIF (1).gif",
-    "Make It Rain Money GIF by SpongeBob SquarePants.gif",
-    "Stephen Colbert Cash GIF by The Late Show With Stephen Colbert.gif",
-    "The Beauty Yolo GIF by FX Networks.gif",
-    "make it rain money GIF.gif",
-    "unflappable GIF by Nick Cannon.gif"
+    {
+      "file": "Fun Dancing GIF.gif",
+      "duration": 3600,
+      "loop": 0
+    },
+    {
+      "file": "Hustling Dave Chappelle GIF.gif",
+      "duration": 2200,
+      "loop": 0
+    },
+    {
+      "file": "Jon Stewart Crying GIF.gif",
+      "duration": 3200,
+      "loop": 0
+    },
+    {
+      "file": "Looney Tunes Money GIF by GrowthX.gif",
+      "duration": 6340,
+      "loop": 0
+    },
+    {
+      "file": "Make It Rain Money GIF (1).gif",
+      "duration": 3000,
+      "loop": 0
+    },
+    {
+      "file": "Make It Rain Money GIF by SpongeBob SquarePants.gif",
+      "duration": 560,
+      "loop": 0
+    },
+    {
+      "file": "Stephen Colbert Cash GIF by The Late Show With Stephen Colbert.gif",
+      "duration": 4070,
+      "loop": 0
+    },
+    {
+      "file": "The Beauty Yolo GIF by FX Networks.gif",
+      "duration": 2070,
+      "loop": 0
+    },
+    {
+      "file": "make it rain money GIF.gif",
+      "duration": 640,
+      "loop": 0
+    },
+    {
+      "file": "unflappable GIF by Nick Cannon.gif",
+      "duration": 3120,
+      "loop": 0
+    }
   ],
   "20d": [
-    "Money Management GIF by Robert E Blackmon.gif",
-    "No Money E9 GIF by AGoodDoctorBTC.gif",
-    "No Money Stock GIF by INTO ACTION.gif",
-    "Side Eye Dog Meme GIF by dnewmie.gif",
-    "Suspicious Monkey GIF by MOODMAN.gif",
-    "stephen colbert laughing GIF by The Late Show With Stephen Colbert.gif"
+    {
+      "file": "Money Management GIF by Robert E Blackmon.gif",
+      "duration": 2940,
+      "loop": 0
+    },
+    {
+      "file": "No Money E9 GIF by AGoodDoctorBTC.gif",
+      "duration": 3400,
+      "loop": 0
+    },
+    {
+      "file": "No Money Stock GIF by INTO ACTION.gif",
+      "duration": 4900,
+      "loop": 0
+    },
+    {
+      "file": "Side Eye Dog Meme GIF by dnewmie.gif",
+      "duration": 960,
+      "loop": 0
+    },
+    {
+      "file": "Suspicious Monkey GIF by MOODMAN.gif",
+      "duration": 2300,
+      "loop": 0
+    },
+    {
+      "file": "stephen colbert laughing GIF by The Late Show With Stephen Colbert.gif",
+      "duration": 870,
+      "loop": 0
+    }
   ],
   "10d": [
-    "Help Me Lol GIF.gif",
-    "Losing My Mind GIF.gif",
-    "Nervous Season 3 GIF by The Office.gif",
-    "Panic Omg GIF.gif",
-    "Sad Cry GIF by MOODMAN.gif",
-    "i hate everything fml GIF by funk.gif",
-    "nervous k&p GIF by myLAB Box.gif"
+    {
+      "file": "Help Me Lol GIF.gif",
+      "duration": 1500,
+      "loop": 0
+    },
+    {
+      "file": "Losing My Mind GIF.gif",
+      "duration": 1600,
+      "loop": 0
+    },
+    {
+      "file": "Nervous Season 3 GIF by The Office.gif",
+      "duration": 3070,
+      "loop": 0
+    },
+    {
+      "file": "Panic Omg GIF.gif",
+      "duration": 1800,
+      "loop": 0
+    },
+    {
+      "file": "Sad Cry GIF by MOODMAN.gif",
+      "duration": 5540,
+      "loop": 0
+    },
+    {
+      "file": "i hate everything fml GIF by funk.gif",
+      "duration": 1300,
+      "loop": 0
+    },
+    {
+      "file": "nervous k&p GIF by myLAB Box.gif",
+      "duration": 1240,
+      "loop": 0
+    }
   ],
   "67d": [
-    "6 7 Dab GIF by Respective.gif",
-    "6 7 GIF.gif",
-    "67 GIF.gif",
-    "Anime Meme GIF.gif",
-    "Cat Basketball GIF by sillynub.gif",
-    "Clash Royale GIF.gif",
-    "Fortnite GIF by Respective.gif",
-    "Ronaldo GIF.gif",
-    "The Pope GIF.gif"
+    {
+      "file": "6 7 Dab GIF by Respective.gif",
+      "duration": 1340,
+      "loop": 0
+    },
+    {
+      "file": "6 7 GIF.gif",
+      "duration": 1100,
+      "loop": 0
+    },
+    {
+      "file": "67 GIF.gif",
+      "duration": 5990,
+      "loop": 0
+    },
+    {
+      "file": "Anime Meme GIF.gif",
+      "duration": 2140,
+      "loop": 0
+    },
+    {
+      "file": "Cat Basketball GIF by sillynub.gif",
+      "duration": 600,
+      "loop": 0
+    },
+    {
+      "file": "Clash Royale GIF.gif",
+      "duration": 1740,
+      "loop": 0
+    },
+    {
+      "file": "Fortnite GIF by Respective.gif",
+      "duration": 2340,
+      "loop": 0
+    },
+    {
+      "file": "Ronaldo GIF.gif",
+      "duration": 3590,
+      "loop": 0
+    },
+    {
+      "file": "The Pope GIF.gif",
+      "duration": 3670,
+      "loop": 0
+    }
   ],
   "5d": [
-    "Beg Crying GIF.gif",
-    "Beg You Please GIF.gif",
-    "Desperate GIF.gif",
-    "Donald Duck Disney GIF.gif",
-    "I Need It Please GIF.gif",
-    "No Money Bangladeshi GIF by GifGari.gif",
-    "Pay Day Money GIF by SWR3.gif",
-    "Pay Me Season 6 GIF by Friends.gif",
-    "Show Me The Money GIF (1).gif",
-    "Show Me The Money GIF.gif",
-    "Starz Pay Me GIF by Power Book II Ghost.gif",
-    "cry crying GIF by Isola dei Famosi.gif",
-    "gif.gif"
+    {
+      "file": "Beg Crying GIF.gif",
+      "duration": 6470,
+      "loop": 0
+    },
+    {
+      "file": "Beg You Please GIF.gif",
+      "duration": 3190,
+      "loop": 0
+    },
+    {
+      "file": "Desperate GIF.gif",
+      "duration": 1790,
+      "loop": 0
+    },
+    {
+      "file": "Donald Duck Disney GIF.gif",
+      "duration": 1300,
+      "loop": 0
+    },
+    {
+      "file": "I Need It Please GIF.gif",
+      "duration": 8600,
+      "loop": 0
+    },
+    {
+      "file": "No Money Bangladeshi GIF by GifGari.gif",
+      "duration": 2450,
+      "loop": 0
+    },
+    {
+      "file": "Pay Day Money GIF by SWR3.gif",
+      "duration": 2470,
+      "loop": 0
+    },
+    {
+      "file": "Pay Me Season 6 GIF by Friends.gif",
+      "duration": 2800,
+      "loop": 0
+    },
+    {
+      "file": "Show Me The Money GIF (1).gif",
+      "duration": 1800,
+      "loop": 0
+    },
+    {
+      "file": "Show Me The Money GIF.gif",
+      "duration": 1700,
+      "loop": 0
+    },
+    {
+      "file": "Starz Pay Me GIF by Power Book II Ghost.gif",
+      "duration": 1620,
+      "loop": 0
+    },
+    {
+      "file": "cry crying GIF by Isola dei Famosi.gif",
+      "duration": 3520,
+      "loop": 0
+    },
+    {
+      "file": "gif.gif",
+      "duration": 1500,
+      "loop": 0
+    }
   ],
   "3d": [
-    "Face Crying GIF.gif",
-    "Help Me Monday GIF by Foo Fighters.gif",
-    "Men Help GIF.gif",
-    "Money Want GIF by TRT.gif",
-    "New Girl Reaction GIF.gif",
-    "Robin Hood Gummy GIF.gif",
-    "Sad Doctor Who GIF.gif",
-    "gif.gif",
-    "sad lilo and stitch GIF.gif",
-    "sad on a budget GIF.gif"
+    {
+      "file": "Face Crying GIF.gif",
+      "duration": 3010,
+      "loop": 0
+    },
+    {
+      "file": "Help Me Monday GIF by Foo Fighters.gif",
+      "duration": 1470,
+      "loop": 0
+    },
+    {
+      "file": "Men Help GIF.gif",
+      "duration": 2740,
+      "loop": 0
+    },
+    {
+      "file": "Money Want GIF by TRT.gif",
+      "duration": 1200,
+      "loop": 0
+    },
+    {
+      "file": "New Girl Reaction GIF.gif",
+      "duration": 1800,
+      "loop": 0
+    },
+    {
+      "file": "Robin Hood Gummy GIF.gif",
+      "duration": 5510,
+      "loop": 0
+    },
+    {
+      "file": "Sad Doctor Who GIF.gif",
+      "duration": 1680,
+      "loop": 0
+    },
+    {
+      "file": "gif.gif",
+      "duration": 1670,
+      "loop": 0
+    },
+    {
+      "file": "sad lilo and stitch GIF.gif",
+      "duration": 600,
+      "loop": 0
+    },
+    {
+      "file": "sad on a budget GIF.gif",
+      "duration": 14080,
+      "loop": 0
+    }
   ],
   "2d": [
-    "Come On Waiting GIF by Robert E Blackmon.gif",
-    "Coming Soon Eyes GIF by VeeFriends.gif",
-    "I Cant Wait Tv Show GIF by Happy Place.gif",
-    "Jimmy Fallon Hand Gesture GIF by The Tonight Show Starring Jimmy Fallon.gif",
-    "Lets Go Reaction GIF.gif",
-    "Mr Bean Waiting GIF by MOODMAN.gif",
-    "The Office Jim GIF.gif"
+    {
+      "file": "Come On Waiting GIF by Robert E Blackmon.gif",
+      "duration": 1540,
+      "loop": 0
+    },
+    {
+      "file": "Coming Soon Eyes GIF by VeeFriends.gif",
+      "duration": 1350,
+      "loop": 0
+    },
+    {
+      "file": "I Cant Wait Tv Show GIF by Happy Place.gif",
+      "duration": 3940,
+      "loop": 0
+    },
+    {
+      "file": "Jimmy Fallon Hand Gesture GIF by The Tonight Show Starring Jimmy Fallon.gif",
+      "duration": 2600,
+      "loop": 0
+    },
+    {
+      "file": "Lets Go Reaction GIF.gif",
+      "duration": 1710,
+      "loop": 0
+    },
+    {
+      "file": "Mr Bean Waiting GIF by MOODMAN.gif",
+      "duration": 3140,
+      "loop": 0
+    },
+    {
+      "file": "The Office Jim GIF.gif",
+      "duration": 4160,
+      "loop": 0
+    }
   ],
   "1d": [
-    "Excited Archie Andrews GIF by Archie Comics.gif",
-    "Going Crazy Snow White GIF.gif",
-    "Happy Lets Go GIF by NHL.gif",
-    "Losing My Mind GIF.gif",
-    "One Day GIF by RevolutionCC.gif",
-    "Proud I Did It GIF by myHQ.gif",
-    "Tired Wide Awake GIF by SEIZON.gif",
-    "alessia marcuzzi isola 12 GIF by Isola dei Famosi.gif"
+    {
+      "file": "Excited Archie Andrews GIF by Archie Comics.gif",
+      "duration": 200,
+      "loop": 0
+    },
+    {
+      "file": "Going Crazy Snow White GIF.gif",
+      "duration": 4340,
+      "loop": 0
+    },
+    {
+      "file": "Happy Lets Go GIF by NHL.gif",
+      "duration": 6680,
+      "loop": 0
+    },
+    {
+      "file": "Losing My Mind GIF.gif",
+      "duration": 1600,
+      "loop": 0
+    },
+    {
+      "file": "One Day GIF by RevolutionCC.gif",
+      "duration": 1200,
+      "loop": 0
+    },
+    {
+      "file": "Proud I Did It GIF by myHQ.gif",
+      "duration": 1740,
+      "loop": 0
+    },
+    {
+      "file": "Tired Wide Awake GIF by SEIZON.gif",
+      "duration": 1520,
+      "loop": 0
+    },
+    {
+      "file": "alessia marcuzzi isola 12 GIF by Isola dei Famosi.gif",
+      "duration": 1800,
+      "loop": 0
+    }
   ],
   "payday": [
-    "Celebration Reaction GIF.gif",
-    "Dance Party Dancing GIF.gif",
-    "Im Rich Make It Rain GIF by Cirokstarr.gif",
-    "Make It Rain Loop GIF by Chris Timmons.gif",
-    "Make It Rain Money GIF.gif",
-    "Miguel Herrera Win GIF.gif",
-    "Pay Day Money GIF.gif",
-    "Real Madrid Celebration GIF.gif",
-    "The Office Party Hard GIF.gif",
-    "rich GIF.gif"
+    {
+      "file": "Celebration Reaction GIF.gif",
+      "duration": 460,
+      "loop": 0
+    },
+    {
+      "file": "Dance Party Dancing GIF.gif",
+      "duration": 10000,
+      "loop": 0
+    },
+    {
+      "file": "Im Rich Make It Rain GIF by Cirokstarr.gif",
+      "duration": 5470,
+      "loop": 0
+    },
+    {
+      "file": "Make It Rain Loop GIF by Chris Timmons.gif",
+      "duration": 1500,
+      "loop": 0
+    },
+    {
+      "file": "Make It Rain Money GIF.gif",
+      "duration": 220,
+      "loop": 0
+    },
+    {
+      "file": "Miguel Herrera Win GIF.gif",
+      "duration": 2100,
+      "loop": 0
+    },
+    {
+      "file": "Pay Day Money GIF.gif",
+      "duration": 1080,
+      "loop": 0
+    },
+    {
+      "file": "Real Madrid Celebration GIF.gif",
+      "duration": 6390,
+      "loop": 0
+    },
+    {
+      "file": "The Office Party Hard GIF.gif",
+      "duration": 4440,
+      "loop": 0
+    },
+    {
+      "file": "rich GIF.gif",
+      "duration": 2600,
+      "loop": 0
+    }
   ]
 }
