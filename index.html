@@ -386,20 +386,20 @@
       characterEl.appendChild(img);
     }
 
-    function nextPayday(now) {
-      let year = now.getFullYear();
-      let month = now.getMonth();
+    // giorno di paga per un dato anno/mese, clampato all'ultimo giorno se il mese e' piu' corto
+    function paydayDateForMonth(year, month) {
       let candidate = new Date(year, month, paydayDay, 0, 0, 0, 0);
-      // clamp day if month has fewer days (e.g. day 31 in Feb -> last day of month)
-      if (candidate.getMonth() !== month) {
+      if (candidate.getMonth() !== ((month % 12) + 12) % 12) {
         candidate = new Date(year, month + 1, 0, 0, 0, 0, 0);
       }
+      return candidate;
+    }
+
+    // prossimo stipendio strettamente futuro (usato solo quando oggi non e' gia' il giorno di paga)
+    function nextPayday(now) {
+      const candidate = paydayDateForMonth(now.getFullYear(), now.getMonth());
       if (candidate <= now) {
-        month += 1;
-        candidate = new Date(year, month, paydayDay, 0, 0, 0, 0);
-        if (candidate.getMonth() !== ((month % 12 + 12) % 12)) {
-          candidate = new Date(year, month + 1, 0, 0, 0, 0, 0);
-        }
+        return paydayDateForMonth(now.getFullYear(), now.getMonth() + 1);
       }
       return candidate;
     }
@@ -435,10 +435,12 @@
 
     function tick() {
       const now = new Date();
-      const target = nextPayday(now);
-      let diff = target - now;
+      // l'intero giorno di paga conta come "arrivato", non solo l'istante di mezzanotte
+      const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const paydayThisMonth = paydayDateForMonth(now.getFullYear(), now.getMonth());
+      const isPaydayToday = todayStart.getTime() === paydayThisMonth.getTime();
 
-      if (diff <= 0) {
+      if (isPaydayToday) {
         body.className = 'state-payday';
         if (currentFolder !== 'payday') {
           currentFolder = 'payday';
@@ -454,6 +456,9 @@
         dEl.textContent = hEl.textContent = mEl.textContent = sEl.textContent = '00';
         return;
       }
+
+      const target = nextPayday(now);
+      const diff = target - now;
 
       const totalSeconds = Math.floor(diff / 1000);
       const days = Math.floor(totalSeconds / 86400);
